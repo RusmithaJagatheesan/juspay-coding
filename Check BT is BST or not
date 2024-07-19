@@ -1,0 +1,22 @@
+class Solution {
+    // Function to check whether a Binary Tree is BST or not.
+    boolean isBST(Node root) {
+        if(root==null){
+            return true;
+        }
+        ArrayList<Integer> al=new ArrayList<>();
+        inorder(root,al);
+        for(int i=1;i<al.size();i++){
+            if(al.get(i)<=al.get(i-1))
+            return false;
+        }
+        return true;
+    }
+    public void inorder(Node root,ArrayList<Integer> al){
+        if(root==null)
+        return;
+        inorder(root.left,al);
+        al.add(root.data);
+        inorder(root.right,al);
+    }
+}
