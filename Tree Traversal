@@ -35,6 +35,58 @@ class BT{
         postorder(root.right);
         System.out.print(root.data+" ");
     }
+    public static void levelorder(Node root){
+        List<Integer> level=new LinkedList<>();
+        if(root==null){
+            return;
+        }
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                Node temp=q.poll();
+                level.add(temp.data);
+                if(temp.left!=null){
+                    q.add(temp.left);
+                }
+                if(temp.right!=null){
+                    q.add(temp.right);
+                }
+            }
+        }
+        for(int i=0;i<level.size();i++){
+            System.out.print(level.get(i)+" ");
+        }
+    }
+    public static void zigZagTraversal(Node root)
+	{
+	    ArrayList<Integer> al=new ArrayList<>();
+	    if(root==null)
+	    return;
+	    Queue<Node> q=new LinkedList<>();
+	    q.add(root);
+	    int flag=0;
+	    while(!q.isEmpty()){
+	        int size=q.size();
+	        ArrayList<Integer> l =new ArrayList<>();
+	        for(int i=0;i<size;i++){
+	            Node n=q.poll();
+	            l.add(n.data);
+	            if(n.left!=null)
+	            q.add(n.left);
+	            if(n.right!=null)
+	            q.add(n.right);
+	        }
+	        if(flag==1)
+	        Collections.reverse(l);
+	        al.addAll(l);
+	        flag=1-flag;
+	    }
+	    for(int i=0;i<al.size();i++){
+            System.out.print(al.get(i)+" ");
+        }
+	}
     public static Node insert(int data){
         Node newNode=new Node(data);
         if(root==null){
@@ -75,5 +127,9 @@ class BT{
         tree.inorder(tree.root);
         System.out.print("\nPostorder: ");
         tree.postorder(tree.root);
+        System.out.print("\nLevel order: ");
+        tree.levelorder(tree.root);
+        System.out.print("\nZig Zag Level order: ");
+        tree.zigZagTraversal(tree.root);
     }
 }
