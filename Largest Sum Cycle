@@ -1,8 +1,8 @@
 import java.util.*;
 class Main {
-    static long sum;
-    public static long largesSumCycle(int N, int Edge[]){
-        long[] values = new long[N];
+    static int sum;
+    public static int largesSumCycle(int N, int[] Edge){
+        int[] values = new int[N];
         sum = -1l;
         for(int i=0; i<N; i++){
             if( Edge[i]>-1 ){
@@ -11,7 +11,7 @@ class Main {
         }
         return sum ;
     }
-    public static void bt(int idx, long curSum, int[]edge, long[]values){
+    public static void bt(int idx, int curSum, int[]edge, int[] values){
         if(edge[idx] == -1) return ;
         if(edge[idx]==-2){
             sum = Math.max(sum, curSum-values[idx]);
