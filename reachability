@@ -1,0 +1,58 @@
+import java.util.*;
+public class newbie{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        List<Integer> id=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            id.add(sc.nextInt());
+        }
+        int tedge=sc.nextInt();
+        Map<Integer,List<Integer>> graph=new HashMap<>();
+        for(int i=0;i<tedge;i++){
+            int follower=sc.nextInt();
+            int following=sc.nextInt();
+            if(!graph.containsKey(follower)){
+                graph.put(follower,new ArrayList<>());
+            }
+            graph.get(follower).add(following);
+            if(!graph.containsKey(following)){
+                graph.put(following,new ArrayList<>());
+            }
+            graph.get(following).add(follower);
+        }
+        int member1=sc.nextInt();
+        int member2=sc.nextInt();
+        Set<Integer> v= new HashSet<>();
+        boolean res=bfs(graph,member1,member2,v);
+        if(res){
+            System.out.print("1");
+        }
+        else{
+            System.out.print("0");
+        }
+    }
+    public static boolean bfs(Map<Integer,List<Integer>> graph,int s,int d,Set<Integer> v){
+         Queue<Integer> queue = new LinkedList<>();
+        queue.offer(s);
+        v.add(s);
+        
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            
+            if (current == d) {
+                return true;
+            }
+            
+            if (graph.containsKey(current)) {
+                for (int neighbor : graph.get(current)) {
+                    if (!v.contains(neighbor)) {
+                        v.add(neighbor);
+                        queue.offer(neighbor);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
